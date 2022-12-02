@@ -1,0 +1,423 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+	list-style: none;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+body {
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+/* reset ends here */
+
+:root {
+	--shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+	--gap: 0.5rem;
+}
+
+.dark {
+	--bgColor: #101010;
+	--fontColor: #aaa;
+	--faintColor: rgba(255, 255, 255, 0.4);
+	--border: solid 0.05rem rgba(255, 255, 255, 0.2);
+	--borderHover: solid 0.05rem rgba(255, 255, 255, 0.4);
+	--borderActive: solid 0.05rem rgba(255, 255, 255, 0.6);
+}
+
+.light {
+	--bgColor: #eee;
+	--fontColor: #505050;
+	--faintColor: rgba(0, 0, 0, 0.4);
+	--border: solid 0.05rem rgba(0, 0, 0, 0.2);
+	--borderHover: solid 0.05rem rgba(0, 0, 0, 0.4);
+	--borderActive: solid 0.05rem rgba(0, 0, 0, 0.6);
+}
+
+body {
+	background: var(--bgColor);
+	color: var(--fontColor);
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif, FontAwesome;
+	overflow: hidden;
+}
+
+button,
+input,
+textarea {
+	background: var(--bgColor);
+	color: var(--fontColor);
+	border: none;
+	border-radius: 1rem;
+	padding: 0.5rem;
+	outline: var(--border);
+	font-size: 0.8rem;
+}
+
+button {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+button:hover,
+button:focus-visible,
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
+	outline: var(--borderHover);
+}
+
+button:active,
+input:active,
+textarea:active {
+	outline: var(--borderActive);
+}
+
+i {
+	pointer-events: none;
+}
+
+/* header */
+header {
+	background: var(--bgColor);
+	border-bottom: var(--border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	height: 4.5rem;
+	padding: 0 1rem;
+	position: relative;
+}
+
+header > h2 {
+	user-select: none;
+}
+
+.headerContainer {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.headerContainer > button {
+	width: 2rem;
+	height: 2rem;
+}
+
+.searchContainer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.searchIcon {
+	position: relative;
+	width: 0;
+	left: 0.5rem;
+}
+
+.searchField {
+	width: 0;
+	height: 2rem;
+	padding-left: 1.5rem;
+	cursor: pointer;
+	transition: width 500ms ease, padding 500ms ease;
+}
+
+.searchField:focus,
+.searchField:not(:placeholder-shown) {
+	width: 15rem;
+	padding-left: 2rem;
+	cursor: inherit;
+}
+
+/* account */
+.accountPanel {
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 1rem;
+	width: 10rem;
+	padding: 1rem;
+	background: var(--bgColor);
+	outline: none;
+	border: var(--border);
+	border-radius: 0 0 1rem 1rem;
+	position: absolute;
+	top: 100%;
+	right: 0;
+}
+
+.accountPanelButtonsContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.accountPanelButtonsContainer > button {
+	width: 100%;
+}
+
+.accountDialogContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.backdrop {
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	z-index: 999;
+}
+
+.accountDialog {
+	width: 40rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: var(--bgColor);
+	border-radius: 1rem;
+	position: relative;
+	z-index: 1000;
+}
+
+.accountDialogHeader {
+	user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	border-bottom: var(--border);
+	width: 100%;
+}
+
+.closeAccountDialogButton {
+	position: absolute;
+	width: 2rem;
+	height: 2rem;
+	right: 1.5rem;
+}
+
+.accountDialogErrorMessage {
+	color: tomato;
+	padding-top: 1rem;
+}
+
+.accountDialogForm {
+	display: flex;
+	flex-direction: column;
+	padding: 2rem;
+	gap: 1rem;
+	width: 20rem;
+}
+
+.accountFieldContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.accountFieldIcon {
+	position: absolute;
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.accountField {
+	padding-left: 2rem;
+	width: 100%;
+}
+
+/* main */
+main {
+	width: 100%;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 1rem;
+	outline: none;
+}
+
+.mainColumn {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+	border-bottom: var(--border);
+}
+
+/* note form */
+.username {
+	color: var(--faintColor);
+}
+
+.noteFormWrapper {
+	width: 40rem;
+}
+
+.noteForm {
+	display: flex;
+	align-items: flex-end;
+	gap: 0.5rem;
+	background: var(--bgColor);
+}
+
+.noteForm > textarea {
+	width: 100%;
+	resize: none;
+}
+
+.noteForm > button {
+	width: 5rem;
+}
+
+/* notes */
+.notes {
+	width: 40rem;
+}
+
+.notes > div:last-child {
+	border: none;
+}
+
+.noteContent {
+	white-space: pre-wrap;
+}
+
+.noteDate {
+	color: var(--faintColor);
+	user-select: none;
+}
+
+.noteButtonsContainer {
+	display: flex;
+	gap: 0.1rem;
+}
+
+.noteButtonsContainer > button {
+	width: 100%;
+}
+
+.noteButtonsContainer button:first-child {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.noteButtonsContainer button:last-child {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+/* responsive */
+@media (max-width: 40rem) {
+	.noteFormWrapper {
+		width: 100%;
+	}
+
+	.notes {
+		width: 100%;
+	}
+
+	.accountDialog {
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+		justify-content: center;
+	}
+
+	.accountForm {
+		height: auto;
+	}
+
+	.accountDialogHeader {
+		border: none;
+		align-items: inherit;
+	}
+
+	.closeAccountDialogButton {
+		top: 1rem;
+		right: 1rem;
+	}
+}
+
+@media (max-width: 31rem) {
+	.searchField:focus,
+	.searchField:not(:placeholder-shown) {
+		width: 100%;
+	}
+
+	.noteForm {
+		flex-direction: column;
+	}
+
+	.noteForm > button {
+		width: 100%;
+	}
+}
