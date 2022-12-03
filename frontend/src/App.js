@@ -21,6 +21,7 @@ const App = () => {
 		<>
 			<Header
 				setSearch={setSearch}
+				showImportant={showImportant}
 				setShowImportant={setShowImportant}
 				user={user}
 				setUser={setUser}

@@ -23,7 +23,6 @@ const ToggleShowImportantButton = ({ showImportant, setShowImportant }) => {
 	const handleClick = () => {
 		setShowImportant((curr) => !curr);
 	};
-
 	return (
 		<button onClick={handleClick}>
 			{showImportant ? (
@@ -129,6 +128,7 @@ const AccountPanel = ({
 
 const Header = ({
 	setSearch,
+	showImportant,
 	setShowImportant,
 	user,
 	setUser,
@@ -144,6 +144,7 @@ const Header = ({
 				<div className="headerContainer">
 					<ToggleShowImportantButton
 						setShowImportant={setShowImportant}
+						showImportant={showImportant}
 					/>
 					<AccountPanelButton
 						setAccountPanelVisibility={setAccountPanelVisibility}
